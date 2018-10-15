@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内容...</title>
+    <link href="${ctxPath}/static/css/styles_fh.css" rel="stylesheet">
+    <script src="${ctxPath}/static/modular/modernizr.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+</head>
+<body>
+<header>
+    <nav id="nav">
+        <ul>
+            <li><a href="/fh">首页</a></li>
+            <li><a href="${ctxPath}/album">相册</a></li>
+        </ul>
+        <script src="${ctxPath}/static/modular//silder.js"></script><!--获取当前页导航 高亮显示标题-->
+    </nav>
+</header>
+<div class="mainContent">
+    <aside>
+        <div class="avatar">
+            <a href="${ctxPath}"><span><p>${list.USER_NAME}</p></span></a>
+        </div>
+        <section class="topspaceinfo">
+            <h1>一花一世界</h1>
+            <p>${list.INTRODUCE}</p>
+        </section>
+        <div class="userinfo">
+            <p class="btns">
+                <a href="${ctxPath}">首页</a>
+                <a href="${ctxPath}/album">相册</a>
+            </p>
+        </div>
+    </aside>
+    <div class="blogitem">
+        <article>
+            <h2 class="title">${content.TITLE}<a href="/"></a></h2>
+            <ul class="text">
+                <p>${content.CONTENT}</p>
+            </ul>
+            <div class="textfoot">
+                <a href="${ctxPath}">返回</a>
+            </div>
+        </article>
+        <!--<div class="pages"><span>1</span><a href="/" hidefocus="">2</a><a href="/" hidefocus="">3</a><a href="/" class="next">下一页&gt;&gt;</a></div>-->
+    </div>
+</div>
+<footer>
+    <div class="footavatar">
+        <img src="${ctxPath}/static/images/1314.jpg" class="footphoto">
+        <ul class="footinfo">
+            <p class="fname"><a href="/dancesmile" >${list.USER_NAME}</a>  </p>
+            <p class="finfo">性别：${list.SEX}</p>
+            <p class="finfo">日期：${list.BIRTH_DATE}</p>
+        </ul>
+    </div>
+    <section class="visitor">
+        <h2>最近访客</h2>
+        <ul>
+            <li><a href="/"><img src="${ctxPath}/static/images/s0.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s1.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s2.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s3.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s5.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s6.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s7.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s8.jpg"></a></li>
+        </ul>
+    </section>
+</footer>
+<div style="text-align:center;">
+</div>
+</body>
+</html>

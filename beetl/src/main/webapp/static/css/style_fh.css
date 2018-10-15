@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.tab1{
+    width: 600px;
+    height: 600px;
+    background-color: red;
+}
+h2{
+    text-align: center;
+    padding-top: 40px;
+    color:ghostwhite;
+}

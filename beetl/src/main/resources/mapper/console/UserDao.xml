@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.text.modular.console.dao.UserDao">
+
+    <select id="queryUserFistList" parameterType="Map" resultType="Map">
+        select c.ID,u.USER_ID,u.USER_NAME,u.PIC,DATE_FORMAT(u.BIRTH_DATE,"%Y-%m-%d")BIRTH_DATE,
+               u.SEX,u.INTRODUCE,c.TITLE,c.PIC,left(CAST(c.CONTENT AS char),120)CONTENT,c.COMMENT_NUM from t_user_info u
+        inner join t_content_post c on u.USER_ID = c.USER_ID and c.`STATUS` = '1'
+        WHERE u.user_id = ${USER_ID}
+        order by c.CRT_TIME desc
+    </select>
+
+    <select id="queryUserBannerList" parameterType="Map" resultType="Map">
+       select concat(@rowZD:=@rowZD+1) AS ROW_NO,b.PIC_NAME,b.URL,b.`DESC`,b.SHOW_STATUS from t_banner b,(SELECT @rowZD:=0) r where b.`STATUS` = 1 order by b.CRT_TIME desc
+    </select>
+
+    <select id="queryNewUserBannerList" parameterType="Map" resultType="Map">
+       select concat(@rowZD:=@rowZD+1) AS ROW_NO,b.PIC_NAME,b.URL,b.`DESC`,b.SHOW_STATUS from t_banner b,(SELECT @rowZD:=0) r where b.`STATUS` = 1 order by b.CRT_TIME desc limit 8
+    </select>
+
+    <select id="queryContentList" parameterType="Map" resultType="Map">
+        select c.ID,c.TITLE,c.PIC,CAST(c.CONTENT AS char)CONTENT,c.COMMENT_NUM
+        from t_content_post c
+        where 1=1
+        <if test="content_id !=null and content_id !=''">
+            AND c.id = #{content_id}
+        </if>
+        <if test="status !=null and status !=''">
+            AND c.status = #{status}
+        </if>
+        order by c.UPDATE_TIME desc
+        <if test="currentPage != null and showCount != null">
+            limit #{currentPage},#{showCount}
+        </if>
+    </select>
+
+    <select id="queryContentCount" resultType="int">
+        select count(*)  from t_content_post t
+        where 1=1
+        <if test="content_id !=null and content_id !=''">
+            AND t.id = #{content_id}
+        </if>
+        <if test="status !=null and status !=''">
+            AND t.status = #{status}
+        </if>
+    </select>
+
+    <insert id="insertContent">
+        INSERT INTO t_content_post (TITLE,CONTENT,USER_ID,ID)
+        values(#{title},#{bytes},#{user_id},#{id})
+    </insert>
+
+    <update id="contentUpdate">
+        UPDATE t_content_post set TITLE = #{title}, CONTENT = #{bytes} where ID = #{id}
+    </update>
+</mapper>

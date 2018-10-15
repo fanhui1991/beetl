@@ -1,0 +1,41 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>首页管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <#NameCon id="content_id" name="内容ID" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="status" name="比赛状态">
+                                    <option value="">全部</option>
+                                    <option value="1">有效</option>
+                                    <option value="0">无效</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-1">
+                                <#button name="查询" icon="fa-search" clickFun="Content.queryContentList()"/>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <#button name="添加" icon="fa-plus" clickFun="Content.queryAddContent()"/>
+                            </div>
+
+                        </div>
+                        <#table id="ContentTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/demo/toDemoContentList.js"></script>
+<script src="${ctxPath}/static/kindeditor/kindeditor-all.js"></script>
+<script src="${ctxPath}/static/kindeditor/lang/zh-CN.js"></script>
+@}

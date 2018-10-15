@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <input type="hidden" id="AUTO_ID" value="1">
+                    <input id="id" name="id" type="hidden" value="${list.ID}">
+                    标题:<br>
+                    <input id="title" name="title" underline="true" value="${list.TITLE}"  style="width:1080px"/>
+
+                    <div id="image-text" contenteditable="true">
+                        内容:<br>
+                        <textarea id="content" name="content"  style="width:1080px; height:500px">${list.CONTENT}
+                            </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="Content.exitSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="Content.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/demo/toDemoContentList.js"></script>
+<script src="${ctxPath}/static/kindeditor/kindeditor-all.js"></script>
+<script src="${ctxPath}/static/kindeditor/lang/zh-CN.js"></script>
+@}

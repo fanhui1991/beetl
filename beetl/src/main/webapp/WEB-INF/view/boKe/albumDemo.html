@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相册</title>
+    <link href="${ctxPath}/static/css/styles_fh.css" rel="stylesheet">
+    <script src="${ctxPath}/static/modular/modernizr.js"></script>
+    <link href="${ctxPath}/static/css/picture.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="${ctxPath}/static/js/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+</head>
+<body>
+<header>
+    <nav id="nav">
+        <ul>
+            <li><a href="${ctxPath}">首页</a></li>
+            <li><a href="${ctxPath}/album">相册</a></li>
+        </ul>
+        <script src="${ctxPath}/static/modular//silder.js"></script><!--获取当前页导航 高亮显示标题-->
+    </nav>
+</header>
+<div class="mainContent">
+    <aside>
+        <div class="avatar">
+            <a href="#"><span><p>${list.USER_NAME}</p></span></a>
+        </div>
+        <section class="topspaceinfo">
+            <h1>一花一世界</h1>
+            <p>${list.INTRODUCE}</p>
+        </section>
+        <div class="userinfo">
+            <p class="btns">
+                <a href="${ctxPath}">首页</a>
+                <a href="${ctxPath}/album">相册</a>
+            </p>
+        </div>
+        <section class="newpic">
+            <h2>最新照片</h2>
+            <ul>
+                @for(banner in newBannerList){
+                    @if(tool.isEmpty(banner.children)){
+                        <li><a target="_blank" href="${ctxPath}/static/images/${banner.PIC_NAME}"><img src="${ctxPath}/static/images/${banner.PIC_NAME}"></a></li>
+                    @}
+                @}
+            </ul>
+        </section>
+    </aside>
+
+    <div class="indexBody">
+        <div class="btn-float"><a class="maxBtn-l" href="javascript:void(0);"></a><a class="maxBtn-r" href="javascript:void(0);"></a></div>
+        <div class="indexbody-main">
+            <div class="indexbody-left"></div>
+            <div class="indexbody-right"></div>
+        </div>
+        <div class="demo w990">
+            <div class="maxPic-box">
+                <div class="maxPic">
+                    <div class="maxPicBox"><span></span><img id="mainPic" src="${ctxPath}/static/images/01.jpg"/></div>
+                </div>
+            </div>
+            <div class="Pic-pageln">
+                <span class="pic-r-span r">
+                    <a href="javascript:void(0);"  class="ico01" id="stop-on"><i class="ins1"></i>已暂停</a>
+                    <a id="showOriginal" target="_blank" href="${ctxPath}/static/images/01.jpg" class="ico02"><i></i>查看原图</a>
+                </span>
+            </div>
+            <div id="tplist" class="w-width clearfix">
+                <div class="bottom-lists l">
+                    <div class="PicBtn-a PicBtn-a-l"><a class="PicBtn-left" href="javascript:void(0);"></a></div>
+                    <div class="minPic l">
+                        <ul class="gallery_demo_unstyled">
+                            @for(banner in bannerList){
+                            @if(tool.isEmpty(banner.children)){
+                                <li id="tu_${banner.ROW_NO}" name="${banner.PIC_NAME}"><a href="javascript:void(0);"><img src="${ctxPath}/static/images/${banner.PIC_NAME}" /></a></li>
+                            @}
+                            @}
+                        </ul>
+                    </div>
+                    <div class="PicBtn-a PicBtn-a-r"><a class="PicBtn-right" href="javascript:void(0);"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer>
+    <div class="footavatar">
+        <img src="${ctxPath}/static/images/1314.jpg" class="footphoto">
+        <ul class="footinfo">
+            <p class="fname"><a href="/dancesmile" >${list.USER_NAME}</a>  </p>
+            <p class="finfo">性别：${list.SEX}</p>
+            <p class="finfo">日期：${list.BIRTH_DATE}</p>
+        </ul>
+    </div>
+    <section class="visitor">
+        <h2>最近访客</h2>
+        <ul>
+            <li><a href="/"><img src="${ctxPath}/static/images/s0.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s1.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s2.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s3.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s5.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s6.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s7.jpg"></a></li>
+            <li><a href="/"><img src="${ctxPath}/static/images/s8.jpg"></a></li>
+        </ul>
+    </section>
+</footer>
+<script type="text/javascript">
+    $(function(){
+        var prevDiv = $(".Up-tuzu");
+        var nextDiv = $(".Next-tuzu");
+        if(prevDiv.find("a").length<1){
+            prevDiv.html("<p style='line-height:120px;color:#666;'><a href='' id='prevUrl'>没有了</a></p>");
+        }
+        if(nextDiv.find("a").length<1){
+            nextDiv.html("<p style='line-height:120px;color:#666;'><a href='' id='nextUrl'>没有了</a></p>");
+        }
+    });
+
+    var selectKey = "1";
+    var k = 1;
+    var picList = new Array();
+        for ( var i = 0; i <$('.gallery_demo_unstyled').children("li").length;i++){
+            var json = {};
+            json["picPos"] =k++;
+            json["pid"] =1540637-i;
+            json["bigPic"] ="${ctxPath}/static/images/"+$('.gallery_demo_unstyled').children("li").eq(i).attr('name');
+            json["thumbPic"] ="${ctxPath}/static/images/"+$('.gallery_demo_unstyled').children("li").eq(i).attr('name');
+            picList.push(json);
+        }
+
+</script>
+<script type="text/javascript" src="${ctxPath}/static/js/picture.js"></script>
+</body>
+</html>
